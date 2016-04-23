@@ -27,7 +27,7 @@ for individual messages in its list. The component hierarchy can be
 thought of according to this JSX pseudo-code:
 
 ```jsx
-<!-- Conceptual model only! -->
+// Conceptual model only!
 <MessageList>
   <Message message="Test message" />
   <Message message="Another test message" />
