@@ -102,7 +102,7 @@ it('contains message divs when deep-rendered', () => {
 But when we use shallow rendering, these DOM nodes are unavailable:
 
 ```jsx
-it('does not contain message divs when deep-rendered', () => {
+it('does not contain message divs when shallow-rendered', () => {
   const component = shallow(<MessageList messageList={messageList} />);
   expect(component.find('.message')).to.have.length(0);
 });
