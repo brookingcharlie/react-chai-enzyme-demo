@@ -13,7 +13,7 @@ show what gets produced when Enzyme's shallow- and deep-rendering functions
 We're testing a simple `MessageList` component that takes an array of message
 strings and produces some HTML. It's used like this:
 
-```
+```jsx
 var messageList = [
   'Test message',
   'Another test message',
@@ -26,7 +26,7 @@ The `MessageList` makes use of another component, `Message`, to render the HTML
 for individual messages in its list. The component hierarchy can be
 thought of according to this JSX pseudo-code:
 
-```
+```jsx
 <!-- Conceptual model only! -->
 <MessageList>
   <Message message="Test message" />
@@ -37,7 +37,7 @@ thought of according to this JSX pseudo-code:
 
 In the end, it renders the following HTML:
 
-```
+```jsx
 <div class="message-list">
   <div class="message">Test message</div>
   <div class="message">Another test message</div>
@@ -55,7 +55,7 @@ or we can use shallow rendering, which only renders DOM nodes for the
 
 Whereas the full DOM rendering looks like this,
 
-```
+```jsx
 <MessageList messageList={{...}}>
   <div className="message-list">
     <Message message="Test message">
@@ -73,7 +73,7 @@ Whereas the full DOM rendering looks like this,
 the shallow rendering only creates the `<div className="message-list">` element
 and leaves each `Message` component unrendered.
 
-```
+```jsx
 <MessageList messageList={{...}}>
   <div className="message-list">
     <Message message="Test message" />
@@ -89,7 +89,7 @@ When doing full DOM rendering, we can write assertions in terms of CSS selectors
 like `.message`, which will find the `<div className="message">` element
 rendered by the `Message` child component. For example:
 
-```
+```jsx
 it('contains message divs when deep-rendered', () => {
   const component = mount(<MessageList messageList={messageList} />);
   expect(component.find('.message')).to.have.length(3);
@@ -101,7 +101,7 @@ it('contains message divs when deep-rendered', () => {
 
 But when we use shallow rendering, these DOM nodes are unavailable:
 
-```
+```jsx
 it('does not contain message divs when deep-rendered', () => {
   const component = shallow(<MessageList messageList={messageList} />);
   expect(component.find('.message')).to.have.length(0);
@@ -115,7 +115,7 @@ arguments. Testing that each `Message` component renders the correct DOM nodes
 is better done in unit tests for `Message` rather than the `MessageList` test,
 which should ideally be testing the `MessageList` component in isolation.
 
-```
+```jsx
 it('renders the message list', () => {
   const component = shallow(<MessageList messageList={messageList} />);
   expect(component).to.have.className('message-list');
